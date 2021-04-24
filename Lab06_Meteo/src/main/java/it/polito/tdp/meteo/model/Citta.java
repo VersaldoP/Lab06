@@ -31,6 +31,9 @@ public class Citta {
 	public List<Rilevamento> getRilevamenti() {
 		return rilevamenti;
 	}
+	public Rilevamento getRilevamento(int data) {
+		return rilevamenti.get(data);
+	}
 
 	public void setRilevamenti(List<Rilevamento> rilevamenti) {
 		this.rilevamenti = rilevamenti;
