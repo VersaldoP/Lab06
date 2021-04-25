@@ -56,7 +56,7 @@ public class Model {
 	
 	public void ricercaCosto(List<Citta>parziale,List<Citta> citta,int costo,int livello) {
 		//Codizone Terminale
-		if(livello==NUMERO_GIORNI_TOTALI) {
+		if(parziale.size()==NUMERO_GIORNI_TOTALI) {
 			if(costo<min) {
 				min=costo;
 			List<Citta> finale=new ArrayList<>(parziale);
@@ -68,7 +68,7 @@ public class Model {
 			for(Citta c: citta) {
 				//Genero la soluzione Parziale
 				if(c.getCounter()<6) {
-					if(c.getCounter()==0) {
+					if(c.getCounter()<3) {
 					parziale.add(c);
 					parziale.add(c);
 					parziale.add(c);
@@ -90,6 +90,7 @@ public class Model {
 					System.out.println(parziale.size());
 					System.out.println(livello);
 					System.out.println(parziale);
+					System.out.println(costo+"---> "+newCosto);
 					ricercaCosto(parziale,citta,newCosto,livello+3);
 					//backtracking
 					c.setCounter(counter);
@@ -97,7 +98,31 @@ public class Model {
 					parziale.remove(c);
 					parziale.remove(c);
 				}
-					else {if(livello<15) {
+//					else {
+//						 if(c!=parziale.get(livello-1)&&c.getCounter()==3) {
+//							 	parziale.add(c);
+//								parziale.add(c);
+//								parziale.add(c);
+//								int counter = c.getCounter();
+//								c.setCounter(counter+3);
+//								int newCosto= costo
+//												+c.getRilevamento(livello).getUmidita()
+//												+c.getRilevamento(livello+1).getUmidita()
+//											    +c.getRilevamento(livello+2).getUmidita();
+//								
+//
+//									newCosto= newCosto+COST;
+//								System.out.println(parziale.size());
+//								System.out.println(livello);
+//								System.out.println(parziale);
+//								ricercaCosto(parziale,citta,newCosto,livello+3);
+//								//backtracking
+//								c.setCounter(counter);
+//								parziale.remove(c);
+//								parziale.remove(c);
+//								parziale.remove(c);
+//						}
+						 else {
 						parziale.add(c);
 						int counter = c.getCounter();
 						c.setCounter(counter+1);
@@ -106,19 +131,20 @@ public class Model {
 						System.out.println(parziale.size());
 						System.out.println(livello);
 						System.out.println(parziale);
-						if(c!=parziale.get(livello))
-							newCosto= newCosto+COST;
+//						if(c!=parziale.get(livello))
+//							newCosto= newCosto+COST;
 						ricercaCosto(parziale,citta,newCosto,livello+1);
 						//backtracking
 						c.setCounter(counter);
 						parziale.remove(c);
-					}
+						 }
+					
 					}
 				}
 			}
 			
 		}
-	}
+	
 	
 //	public void costoRicorsivo(List<Citta> parziale,List<Citta>citta,int costo, int livello) {
 ////		System.out.println(livello);
